@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="'./_队列的封装.js'"></script>
+</head>
+<body>
+ 
+<script>
+  // 击鼓传花
+  function PassGame(nameList, num) {
+
+    var queue = new Queue()
+    
+    // 入队
+    for (var i = 0; i < nameList.length; i++) {
+      queue.enqueue(nameList[i])
+    }
+
+    while (queue.size() > 1) {
+      for (var i = 0; i < num - 1; i++) {
+        queue.enqueue(queue.dequeue())
+      }
+      queue.dequeue()
+    }
+    
+    var endName = queue.front()
+    return nameList.indexOf(endName)
+  }
+
+  
+</script>
+</body>
+</html>

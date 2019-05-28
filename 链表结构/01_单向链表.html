@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function LinkedList() {
+     
+    // 定义一个节点类
+    function Node(data) {
+      this.data = data
+      this.next = null
+    }
+
+    this.head = null
+    this.length = 0
+
+    LinkedList.prototype.append = function (data) {
+      var newNode = new Node(data)
+
+      // 如果链表的长度是 0，头节点就是链表的第一个元素
+      if (this.length === 0) {
+        this.head = newNode
+      } else {
+        var current = this.head
+        while (current.next) {
+          current = current.next
+        }
+        current.next = newNode
+      }
+      this.length += 1 
+    }
+
+    LinkedList.prototype.toString = function () {
+      var current = this.head
+      var listString = ''
+
+      while (current) {
+        listString += current.data + '=>'
+        current = current.next
+      }
+
+      return listString
+    }
+
+    // 插入一个节点
+    LinkedList.prototype.insert = function (position, data) {
+      
+      if (this.length < 0 || position > this.length) return false
+
+      var newNode = new Node(data)
+
+      if (position === 0) {
+        newNode.next = this.head
+        this.head = newNode
+      } else {
+        var index = 0
+        var cur = this.head
+        var pre = null
+        while (index < position) {
+          pre = cur
+          cur = cur.next
+          index += 1
+        }
+        newNode.next = cur
+        pre.next = newNode
+      }
+
+      this.length += 1
+      return true
+    }
+
+    // get 方法
+    LinkedList.prototype.get = function (position) {
+
+      // 越界判断
+      if (position < 0 || position >= this.length) return false
+
+      var index = 0
+      var cur = this.head
+      while (index < position) {
+        cur = cur.next
+        index += 1
+      }
+      return cur.data
+    }
+  }
+
+  // 测试
+
+  var list = new LinkedList()
+
+  list.append('asy')
+  list.append('yyf')
+  list.append('react')
+  list.insert(2, '820')
+  alert(list)
+  alert(list.get(3))
+</script>
+</body>
+</html>

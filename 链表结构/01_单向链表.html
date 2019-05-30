@@ -88,6 +88,72 @@
       }
       return cur.data
     }
+
+    LinkedList.prototype.indexOf = function (data) {
+
+      var index = 0
+      var cur = this.head
+      // 开始查找
+      while (cur) {
+        if (cur.data === data) {
+          return index
+        }
+        index += 1
+      }
+      // 如没找到，返回 -1
+      return -1 
+    }
+
+    LinkedList.prototype.updata = function (position, data) {
+
+      if (position < 0 || position >= this.length) return false
+
+      var index = 0
+      var cur = this.head
+      while (index < position) {
+        cur = cur.next
+        index += 1
+      } 
+      cur.data = data
+      return true
+    } 
+
+    LinkedList.prototype.removeAt = function (position) {
+
+      // 越界判断
+      if (position < 0 || position >= this.length) return false
+
+      // 删除第一个节点
+      if (position === 0) {
+        this.head = this.head.next
+      } else {
+        var index = 0
+        var cur = this.head
+        var pre = null
+        while (index < position) {
+          pre = cur
+          cur = cur.next
+          index += 1
+        }
+        pre.next = cur.next
+      }
+      this.length -= 1
+      return true
+    }
+
+    LinkedList.prototype.remove = function (data) {
+
+      var position = this.indexOf(data)
+      return this.removeAt(position )
+    }
+
+    LinkedList.prototype.isEmpty = function () {
+      return this.length === 0
+    }
+
+    LinkedList.prototype.length = function () {
+      return this.length
+    }
   }
 
   // 测试
@@ -99,7 +165,8 @@
   list.append('react')
   list.insert(2, '820')
   alert(list)
-  alert(list.get(3))
+  list.updata(2, 566)
+  alert(list)
 </script>
 </body>
 </html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function BinarySearchTree() {
+
+    function Node(data) {
+      this.data = data
+      this.left = null
+      this.right = null
+    }
+
+    this.root = null
+
+    // 插入数据, 暴露给外部调用的方法
+    BinarySearchTree.prototype.insert = function (data) {
+
+      var newNode = new Node(data)
+
+      if (this.root === null) {
+        this.root = newNode
+      } else {
+        this._insertNode(this.root, newNode)
+      }
+    }
+
+    BinarySearchTree.prototype._insertNode = function (node, newNode) {
+      // 向左查找
+      if (newNode.data < node.data) {
+        // 如果为空，直接插入
+        node.left ? this._insertNode(node.left, newNode) : node.left = newNode
+      } else {
+        node.right ? this._insertNode(node.right, newNode) : node.right = newNode
+      }
+    }
+
+    // 先序遍历
+    BinarySearchTree.prototype.preOrderTraversal = function (callback) {
+        const preOrderTraversalNode = (node, callback) => {
+          if (node) {
+            callback(node.data)
+            preOrderTraversalNode(node.left, callback)
+            preOrderTraversalNode(node.right, callback)
+          }
+        }
+        preOrderTraversalNode(this.root, callback)
+    }
+
+    // function preOrderTraversalNode(node) {
+    //   if(node) {
+    //     console.log(node.data)
+    //     preOrderTraversalNode(node.left)
+    //     preOrderTraversalNode(node.right)
+    //   }
+    // }
+
+  }
+
+
+  var bst = new BinarySearchTree()
+
+  bst.insert(15)
+  bst.insert(2)
+  bst.insert(9)
+  bst.insert(20)
+  bst.insert(14)
+  bst.insert(6)
+  bst.insert(18)
+  bst.insert(5)
+
+  var result = ''
+  // 访问者模式，
+  bst.preOrderTraversal(function(data) {
+    result += data + ' '
+  })
+  alert(result)
+</script>
+</body>
+</html>

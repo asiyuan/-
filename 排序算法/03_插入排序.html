@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 局部有序
+
+    function insertSort(arr) {
+      // 外层循环，从第1个位置获取元素，向前局部有序插入元素
+      for (var i = 1; i < arr.length; i++) {
+        var j = i
+        var temp = arr[i]
+        while (arr[j-1] > temp && j > 0) {
+          arr[j] = arr[j-1]
+          j--
+        } 
+        arr[j] = temp
+      }
+      return arr
+    }
+
+    var arr = [3,10,22,6,1,0,9]
+
+    console.log(insertSort(arr))
+  </script>
+</body>
+</html>
